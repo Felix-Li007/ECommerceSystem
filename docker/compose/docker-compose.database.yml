@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  userdb:
+    image: mysql:8.0
+    container_name: userdb
+    restart: unless-stopped
+    environment:
+      MYSQL_USER: userservice
+      MYSQL_PASSWORD: User@123
+      MYSQL_ROOT_PASSWORD: root@123
+      MYSQL_DATABASE: UserServiceDB
+    volumes:
+      - userdb-data:/var/lib/mysql
+      - ../mysql/userdb:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    networks:
+      - userdb-network
+
+volumes:
+  userdb-data:
+    driver: local
+
+networks:
+  userdb-network:
+    driver: bridge

@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  userservice:
+    build:
+      context: .
+      dockerfile: ../../src/Services/UserService/UserService.API/Dockerfile
+    container_name: userservice
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__DefaultConnection=Server=userdb;Port=3306;Database=UserServiceDB;User=root;Password=User@123;
+    ports:
+      - "5001:80"
+    depends_on:
+      userdb:
+        condition: service_healthy
+    networks:
+      - userdb-network
+    restart: on-failure
+
+  apigateway:
+    build:
+      context: .
+      dockerfile: ../../src/Gateways/ApiGateway/Dockerfile
+    container_name: apigateway
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+    depends_on:
+      - userservice
+      - productservice
+      - orderservice
+    networks:
+      - userdb-network
+    restart: on-failure
+
+  adminweb:
+    build:
+      context: .
+      dockerfile: ../../src/AdminWeb/Dockerfile
+    container_name: adminweb
+    ports:
+      - "5004:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - ApiGatewayUrl=http://apigateway
+    depends_on:
+      - apigateway
+    networks:
+      - userdb-network
+    restart: on-failure

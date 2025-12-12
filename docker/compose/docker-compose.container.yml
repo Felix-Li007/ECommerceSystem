@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  devcontainer:
+    image: mcr.microsoft.com/devcontainers/dotnet:1-9.0-bookworm
+    volumes:
+      - ../../:/workspace:cached
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: sleep infinity
+    depends_on:
+      - userdb
+    networks:
+      - userdb-network
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development

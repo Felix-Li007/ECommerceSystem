@@ -1,0 +1,50 @@
+@ApiGateway_HostAddress = http://localhost:5271
+
+### health check
+GET {{ApiGateway_HostAddress}}/health
+
+
+### Get all users
+GET {{ApiGateway_HostAddress}}/api/users
+
+### Create user
+POST {{ApiGateway_HostAddress}}/api/users
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "email": "test@example.com",
+  "password": "Test@123",
+  "fullName": "Test User",
+  "phoneNumber": "1234567890"
+}
+
+### User authentication
+POST {{ApiGateway_HostAddress}}/api/users/authenticate
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "Test@123"
+}
+
+### Get user based on ID
+GET {{ApiGateway_HostAddress}}/api/users/{{userId}}
+
+### ===== ProductService 通过网关 =====
+
+### Get all products
+GET {{ApiGateway_HostAddress}}/api/products
+
+### Create product
+POST {{ApiGateway_HostAddress}}/api/products
+Content-Type: application/json
+
+{
+  "name": "Test Product",
+  "description": "Test Description",
+  "price": 99.99,
+  "stock": 100,
+  "category": "Electronics"
+}
+
