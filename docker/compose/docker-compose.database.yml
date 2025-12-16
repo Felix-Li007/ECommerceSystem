@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_USER: userservice
-      MYSQL_PASSWORD: User@123
+      MYSQL_PASSWORD: User123
       MYSQL_ROOT_PASSWORD: root@123
       MYSQL_DATABASE: UserServiceDB
     volumes:
@@ -16,11 +16,34 @@ services:
       - "3306:3306"
     networks:
       - userdb-network
+    command: --default-authentication-plugin=mysql_native_password
+
+  orderdb:
+    image: mysql:8.0
+    container_name: orderdb
+    restart: unless-stopped
+    environment:
+      MYSQL_USER: orderservice
+      MYSQL_PASSWORD: Order123
+      MYSQL_ROOT_PASSWORD: root@123
+      MYSQL_DATABASE: OrderServiceDB
+    volumes:
+      - orderdb-data:/var/lib/mysql
+      - ../mysql/orderdb:/docker-entrypoint-initdb.d
+    ports:
+      - "3307:3306"
+    networks:
+      - orderdb-network
+    command: --default-authentication-plugin=mysql_native_password
 
 volumes:
   userdb-data:
     driver: local
+  orderdb-data:
+    driver: local
 
 networks:
   userdb-network:
+    driver: bridge
+  orderdb-network:
     driver: bridge

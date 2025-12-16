@@ -9,3 +9,4 @@
 /workspace/src/Services/UserService/UserService.Domain/obj/Debug/net9.0/refint/UserService.Domain.dll
 /workspace/src/Services/UserService/UserService.Domain/obj/Debug/net9.0/UserService.Domain.pdb
 /workspace/src/Services/UserService/UserService.Domain/obj/Debug/net9.0/ref/UserService.Domain.dll
+/workspace/src/Services/UserService/UserService.Domain/obj/Debug/net9.0/UserService.Domain.sourcelink.json

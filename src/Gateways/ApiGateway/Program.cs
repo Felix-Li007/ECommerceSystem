@@ -1,6 +1,9 @@
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using ApiGateway.Extensions;
+using Prometheus;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +28,24 @@ builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();
 
+// 添加 OpenTelemetry
+builder.Services.AddOpenTelemetry()
+    .WithTracing(tracerProviderBuilder =>
+    {
+        tracerProviderBuilder
+            .AddSource("ApiGateway")
+            .SetResourceBuilder(ResourceBuilder.CreateDefault()
+                .AddService("ApiGateway"))
+            .AddAspNetCoreInstrumentation()
+            .AddHttpClientInstrumentation()
+            .AddZipkinExporter(options =>
+            {
+                var zipkinUrl = builder.Configuration["Zipkin:Endpoint"]
+                    ?? "http://zipkin:9411/api/v2/spans";
+                options.Endpoint = new Uri(zipkinUrl);
+            });
+    });
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -33,6 +54,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("AllowAll");
+
+// Prometheus 指标
+app.UseMetricServer();
+app.UseHttpMetrics();
+
 
 app.UseRequestLogging();
 

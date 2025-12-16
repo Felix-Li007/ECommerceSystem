@@ -4,6 +4,10 @@ using UserService.Infrastructure.Data;
 using UserService.Infrastructure.Repositories;
 using UserService.Domain.Repositories;
 using UserService.Application.Services;
+using UserService.API.Services;
+using Prometheus;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +49,25 @@ builder.Services.AddCors(options =>
 
 
 builder.Services.AddHealthChecks();
+builder.Services.AddSingleton<IMetricsService, MetricsService>();
+
+// 添加 OpenTelemetry
+builder.Services.AddOpenTelemetry()
+    .WithTracing(tracerProviderBuilder =>
+    {
+        tracerProviderBuilder
+            .AddSource("UserService")
+            .SetResourceBuilder(ResourceBuilder.CreateDefault()
+                .AddService("UserService"))
+            .AddAspNetCoreInstrumentation()
+            .AddHttpClientInstrumentation()
+            .AddZipkinExporter(options =>
+            {
+                var zipkinUrl = builder.Configuration["Zipkin:Endpoint"]
+                    ?? "http://zipkin:9411/api/v2/spans";
+                options.Endpoint = new Uri(zipkinUrl);
+            });
+    });
 
 var app = builder.Build();
 
@@ -74,6 +97,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("AllowAll");
+
+// Prometheus 指标
+app.UseMetricServer();
+app.UseHttpMetrics();
+
 app.UseAuthorization();
 app.MapControllers();
 app.MapHealthChecks("/health");

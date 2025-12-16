@@ -3,7 +3,6 @@
 /workspace/src/Gateways/ApiGateway/bin/Debug/net9.0/appsettings.Production.json
 /workspace/src/Gateways/ApiGateway/bin/Debug/net9.0/Configuration/ocelot.Production.json
 /workspace/src/Gateways/ApiGateway/bin/Debug/net9.0/ApiGateway.staticwebassets.endpoints.json
-/workspace/src/Gateways/ApiGateway/bin/Debug/net9.0/ApiGateway
 /workspace/src/Gateways/ApiGateway/bin/Debug/net9.0/ApiGateway.deps.json
 /workspace/src/Gateways/ApiGateway/bin/Debug/net9.0/ApiGateway.runtimeconfig.json
 /workspace/src/Gateways/ApiGateway/bin/Debug/net9.0/ApiGateway.dll
@@ -42,3 +41,14 @@
 /workspace/src/Gateways/ApiGateway/obj/Debug/net9.0/ApiGateway.genruntimeconfig.cache
 /workspace/src/Gateways/ApiGateway/obj/Debug/net9.0/ref/ApiGateway.dll
 /workspace/src/Gateways/ApiGateway/bin/Debug/net9.0/Configuration/ocelot.Development.json
+/workspace/src/Gateways/ApiGateway/obj/Debug/net9.0/ApiGateway.sourcelink.json
+/workspace/src/Gateways/ApiGateway/bin/Debug/net9.0/OpenTelemetry.dll
+/workspace/src/Gateways/ApiGateway/bin/Debug/net9.0/OpenTelemetry.Api.dll
+/workspace/src/Gateways/ApiGateway/bin/Debug/net9.0/OpenTelemetry.Api.ProviderBuilderExtensions.dll
+/workspace/src/Gateways/ApiGateway/bin/Debug/net9.0/OpenTelemetry.Exporter.Zipkin.dll
+/workspace/src/Gateways/ApiGateway/bin/Debug/net9.0/OpenTelemetry.Extensions.Hosting.dll
+/workspace/src/Gateways/ApiGateway/bin/Debug/net9.0/OpenTelemetry.Instrumentation.AspNetCore.dll
+/workspace/src/Gateways/ApiGateway/bin/Debug/net9.0/OpenTelemetry.Instrumentation.Http.dll
+/workspace/src/Gateways/ApiGateway/bin/Debug/net9.0/Prometheus.NetStandard.dll
+/workspace/src/Gateways/ApiGateway/bin/Debug/net9.0/Prometheus.AspNetCore.dll
+/workspace/src/Gateways/ApiGateway/bin/Debug/net9.0/System.Diagnostics.DiagnosticSource.dll

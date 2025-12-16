@@ -13,3 +13,4 @@
 /workspace/src/Services/UserService/UserService.Application/obj/Debug/net9.0/refint/UserService.Application.dll
 /workspace/src/Services/UserService/UserService.Application/obj/Debug/net9.0/UserService.Application.pdb
 /workspace/src/Services/UserService/UserService.Application/obj/Debug/net9.0/ref/UserService.Application.dll
+/workspace/src/Services/UserService/UserService.Application/obj/Debug/net9.0/UserService.Application.sourcelink.json

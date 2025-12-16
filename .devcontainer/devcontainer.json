@@ -6,7 +6,8 @@
 	// "image": "mcr.microsoft.com/devcontainers/dotnet:1-9.0-bookworm"
 	"dockerComposeFile": [
 		"../docker/compose/docker-compose.database.yml",
-		"../docker/compose/docker-compose.container.yml"
+		"../docker/compose/docker-compose.container.yml",
+		"../docker/compose/docker-compose.monitor.yml"
 	],
 	"service": "devcontainer",
 	"workspaceFolder": "/workspace",
