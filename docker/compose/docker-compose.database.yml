@@ -36,14 +36,36 @@ services:
       - orderdb-network
     command: --default-authentication-plugin=mysql_native_password
 
+  admindb:
+    image: mysql:8.0
+    container_name: admindb
+    restart: unless-stopped
+    environment:
+      MYSQL_USER: adminweb
+      MYSQL_PASSWORD: Admin123
+      MYSQL_ROOT_PASSWORD: root@123
+      MYSQL_DATABASE: AdminWebDB
+    volumes:
+      - admindb-data:/var/lib/mysql
+      - ../mysql/admindb:/docker-entrypoint-initdb.d
+    ports:
+      - "3308:3306"
+    networks:
+      - admindb-network
+    command: --default-authentication-plugin=mysql_native_password
+
 volumes:
   userdb-data:
     driver: local
   orderdb-data:
+    driver: local
+  admindb-data:
     driver: local
 
 networks:
   userdb-network:
     driver: bridge
   orderdb-network:
+    driver: bridge
+  admindb-network:
     driver: bridge

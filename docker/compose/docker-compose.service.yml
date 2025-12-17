@@ -51,5 +51,5 @@ services:
     depends_on:
       - apigateway
     networks:
-      - userdb-network
+      - admindb-network
     restart: on-failure
